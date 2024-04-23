@@ -3,6 +3,16 @@
 	"EngineAssociation": "5.2",
 	"Category": "",
 	"Description": "",
+	"Modules": [
+		{
+			"Name": "CrypticAcademia",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+		}
+	],
 	"Plugins": [
 		{
 			"Name": "OpenXR",
@@ -12,6 +22,22 @@
 				"Linux",
 				"Android",
 				"HoloLens"
+			]
+		},
+		{
+			"Name": "OculusVR",
+			"Enabled": true,
+			"SupportedTargetPlatforms": [
+				"Win64",
+				"Android"
+			]
+		},
+		{
+			"Name": "SteamVR",
+			"Enabled": true,
+			"SupportedTargetPlatforms": [
+				"Win64",
+				"Linux"
 			]
 		}
 	],
