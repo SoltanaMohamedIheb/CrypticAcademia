@@ -6,7 +6,10 @@
 #include "GameFramework/Actor.h"
 #include "CrypticCardBase.generated.h"
 
-UCLASS()
+class UAbilitySystemComponent;
+class UAttributeSet;
+
+UCLASS(Abstract)
 class CRYPTICACADEMIA_API ACrypticCardBase : public AActor
 {
 	GENERATED_BODY()
@@ -18,6 +21,14 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	UPROPERTY()
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeSet> AttributeSet;
+	
+	
 
 public:	
 	// Called every frame
