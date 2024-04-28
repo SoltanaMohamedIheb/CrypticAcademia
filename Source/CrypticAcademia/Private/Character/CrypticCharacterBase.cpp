@@ -3,6 +3,9 @@
 
 #include "Character/CrypticCharacterBase.h"
 
+#include "AbilitySystemComponent.h"
+#include "Player/CrypticPlayerState.h"
+
 // Sets default values
 ACrypticCharacterBase::ACrypticCharacterBase()
 {
@@ -11,11 +14,35 @@ ACrypticCharacterBase::ACrypticCharacterBase()
 
 }
 
+void ACrypticCharacterBase::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	//Init Ability Actor Info For The Server
+	InitAbilityActorInfo();
+}
+
+void ACrypticCharacterBase::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+	//Init Ability Actor Info For The Client
+	InitAbilityActorInfo();
+	
+}
+
 // Called when the game starts or when spawned
 void ACrypticCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void ACrypticCharacterBase::InitAbilityActorInfo()
+{
+	ACrypticPlayerState* CrypticPlayerState = GetPlayerState<ACrypticPlayerState>();
+	check(CrypticPlayerState);
+	CrypticPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(CrypticPlayerState,this);
+	AbilitySystemComponent = CrypticPlayerState->GetAbilitySystemComponent();
+	AttributeSet = CrypticPlayerState->GetAttributeSet();
 }
 
 // Called every frame

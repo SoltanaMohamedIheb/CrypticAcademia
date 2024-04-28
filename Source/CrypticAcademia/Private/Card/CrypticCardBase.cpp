@@ -13,14 +13,22 @@ ACrypticCardBase::ACrypticCardBase()
 	PrimaryActorTick.bCanEverTick = true;
     AbilitySystemComponent = CreateDefaultSubobject<UCrypticAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+
 
 	AttributeSet = CreateDefaultSubobject<UCrypticAttributeSet>("AttributeSet");
+}
+
+UAbilitySystemComponent* ACrypticCardBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
 }
 
 // Called when the game starts or when spawned
 void ACrypticCardBase::BeginPlay()
 {
 	Super::BeginPlay();
+	AbilitySystemComponent->InitAbilityActorInfo(this,this);
 	
 }
 
